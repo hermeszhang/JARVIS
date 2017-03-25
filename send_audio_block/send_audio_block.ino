@@ -2,16 +2,17 @@ const int pin = 0;
 const int vcc = 5;
 const float midlevel = vcc/2.0;
 const float quantlevel = 1024.0;
+const int BLOCK_SIZE = 100;
 
 int indx = 0;
-float block[320] = {0.0};
+float block[BLOCK_SIZE] = {0.0};
 int t = 0;
 int t_old = 0;
 String sblock;
 
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(57600);
   
 }
 
@@ -22,15 +23,12 @@ void loop() {
     t_old = t;
     indx++;
   }
-  if(indx >= 320){
-    for(int i=0; i<320; i++){
+  if(indx >= BLOCK_SIZE){
+    for(int i=0; i<BLOCK_SIZE; i++){
       //sblock += block[i];
       //sblock += ", ";
-      Serial.print(block[i]);
-      Serial.print(", ");
+      Serial.println(block[i]);
     }
-    Serial.println();
-    sblock = "";
     indx = 0;
   }
 }
